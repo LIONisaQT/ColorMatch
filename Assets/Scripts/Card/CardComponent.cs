@@ -7,15 +7,15 @@ public class CardComponent : MonoBehaviour
 
     public string cardValue;
 
-    public void SetColor(ColorMatchColor color)
+    public void SetColor(ColorMatchColor color, bool isTop)
     {
-        _text.text = color.name.ToUpper();
-        _text.color = color.color;
+        _text.text = color.name;
+        if (!isTop) _text.color = color.color;
         cardValue = color.name;
     }
 
     public void SetText(string color)
     {
-        _text.text = color.ToUpper();
+        _text.text = color;
     }
 }

@@ -72,8 +72,8 @@ public class CardSet : MonoBehaviour
                 break;
         }
 
-        _topCard.SetColor(topColor);
-        _bottomCard.SetColor(bottomColor);
+        _topCard.SetColor(topColor, true);
+        _bottomCard.SetColor(bottomColor, false);
         _bottomCard.SetText(bottomWordValue);
     }
 
