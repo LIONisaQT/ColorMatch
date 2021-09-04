@@ -1,26 +1,30 @@
 [
   {
     "choice": true,
-    "duration": 1.17727053
+    "duration": 0.9086228
   },
   {
     "choice": true,
-    "duration": 0.701429844
+    "duration": 0.485260665
   },
   {
     "choice": true,
-    "duration": 0.617946446
+    "duration": 0.4657861
   },
   {
     "choice": true,
-    "duration": 0.8112899
+    "duration": 0.5913113
   },
   {
     "choice": true,
-    "duration": 0.791924834
+    "duration": 0.6627775
   },
   {
     "choice": true,
-    "duration": 0.5741739
+    "duration": 0.810030162
+  },
+  {
+    "choice": true,
+    "duration": 0.7095727
   }
 ]
