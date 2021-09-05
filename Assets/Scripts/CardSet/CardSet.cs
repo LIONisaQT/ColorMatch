@@ -26,6 +26,7 @@ public class CardSet : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        onPlayerChoice = null;
     }
 
     #region Animation

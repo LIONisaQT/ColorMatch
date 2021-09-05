@@ -1,26 +1,62 @@
 [
   {
+    "choice": true,
+    "duration": 0.8598182
+  },
+  {
+    "choice": true,
+    "duration": 0.7460523
+  },
+  {
+    "choice": true,
+    "duration": 0.6801845
+  },
+  {
+    "choice": true,
+    "duration": 0.792061269
+  },
+  {
+    "choice": true,
+    "duration": 0.678767443
+  },
+  {
+    "choice": true,
+    "duration": 2.01124
+  },
+  {
+    "choice": true,
+    "duration": 0.0
+  },
+  {
+    "choice": true,
+    "duration": 0.592544138
+  },
+  {
+    "choice": true,
+    "duration": 0.0
+  },
+  {
     "choice": false,
-    "duration": 0.9358936
-  },
-  {
-    "choice": true,
-    "duration": 0.8114512
+    "duration": 1.14321554
   },
   {
     "choice": false,
-    "duration": 0.7429526
+    "duration": 0.0
   },
   {
     "choice": true,
-    "duration": 0.8792739
+    "duration": 1.46078873
   },
   {
     "choice": true,
-    "duration": 0.6567591
+    "duration": 0.0
   },
   {
     "choice": true,
-    "duration": 0.6874301
+    "duration": 0.7910957
+  },
+  {
+    "choice": true,
+    "duration": 0.0
   }
 ]

@@ -6,10 +6,11 @@ public class GameTimer : MonoBehaviour
 {
     public Action onTimerFinish;
 
-    [SerializeField] public float _timeValue = 10f;
+    [SerializeField] private float _timeValue = 10f;
     [SerializeField] public TextMeshProUGUI _timeText;
     [SerializeField] private AudioClip _timeUpClip;
 
+    private float _currentTimeValue;
     private bool _timerStarted = false;
     private bool _invokedTimerFinishAction = false;
     private AudioSource _audioSource;
@@ -17,35 +18,34 @@ public class GameTimer : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
+        _currentTimeValue = _timeValue;
     }
 
-    private void Start()
+    public void Instantiate()
     {
-        DisplayTime(_timeValue);
+        DisplayTime(_currentTimeValue);
     }
 
     private void Update()
     {
         if (!_timerStarted) return;
 
-        if (_timeValue > 0)
+        if (_currentTimeValue > 0)
         {
-            _timeValue -= Time.deltaTime;
+            _currentTimeValue -= Time.deltaTime;
         }
         else
         {
-            _timeValue = 0;
+            _currentTimeValue = 0;
             _timerStarted = false;
 
             if (!_invokedTimerFinishAction)
             {
-                _invokedTimerFinishAction = true;
-                onTimerFinish?.Invoke();
-                _audioSource.PlayOneShot(_timeUpClip);
+                TimerFinished();
             }
         }
 
-        DisplayTime(_timeValue);
+        DisplayTime(_currentTimeValue);
     }
 
     private void DisplayTime(float timeToDisplay)
@@ -64,5 +64,20 @@ public class GameTimer : MonoBehaviour
     public void StartTimer()
     {
         _timerStarted = true;
+    }
+    
+    private void TimerFinished()
+    {
+        _invokedTimerFinishAction = true;
+        onTimerFinish?.Invoke();
+        _audioSource.PlayOneShot(_timeUpClip);
+    }
+
+    public void ResetTimer()
+    {
+        _timerStarted = false;
+        _invokedTimerFinishAction = false;
+        _currentTimeValue = _timeValue;
+        onTimerFinish = null;
     }
 }

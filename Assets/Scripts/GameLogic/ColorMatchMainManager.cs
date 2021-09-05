@@ -28,12 +28,14 @@ public class ColorMatchMainManager : MonoBehaviour
     public void GoToGame()
     {
         _gameManager.gameObject.SetActive(true);
+        _gameManager.Instantiate();
         _homeManager.gameObject.SetActive(false);
     }
 
     public void GoToHome()
     {
         _gameManager.gameObject.SetActive(false);
+        _homeManager.Instantiate();
         _homeManager.gameObject.SetActive(true);
     }
 }
