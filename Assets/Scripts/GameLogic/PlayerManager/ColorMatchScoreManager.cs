@@ -10,7 +10,7 @@ public class ColorMatchScoreManager : MonoBehaviour
 
     public int Score => _currentScore;
 
-    public void Reset()
+    public void Initialize()
     {
         _currentScore = 0;
         _currentMultiplier = 1;

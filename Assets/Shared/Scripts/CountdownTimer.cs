@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class CountdownTimer : MonoBehaviour
 {
     private const int DEFAULT_COUNTDOWN_TIME = 3;
 
-    public System.Action onCountdownFinish;
+    public Action onCountdownFinish;
 
     [SerializeField] private TextMeshProUGUI _number;
 
@@ -22,6 +23,11 @@ public class CountdownTimer : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+    }
+
+    public void Initialize()
+    {
+        onCountdownFinish = null;
     }
 
     public void PlayCountdown(int countdownTime = DEFAULT_COUNTDOWN_TIME)

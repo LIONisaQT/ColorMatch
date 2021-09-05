@@ -86,7 +86,7 @@ public class ColorMatchGameManager : MonoBehaviour
             {
                 resultType = MatchResultType.DecisiveWin;
             }
-            else if(playerScore - botScore < 100)
+            else if(playerScore - botScore <= 100)
             {
                 resultType = MatchResultType.CloseWin;
             }
@@ -105,7 +105,7 @@ public class ColorMatchGameManager : MonoBehaviour
             {
                 resultType = MatchResultType.DecisiveLoss;
             }
-            else if (botScore - playerScore < 100)
+            else if (botScore - playerScore <= 100)
             {
                 resultType = MatchResultType.CloseLoss;
             }

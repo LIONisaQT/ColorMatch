@@ -58,6 +58,7 @@ MonoBehaviour:
   _countdownTimer: {fileID: 3782162644238678267}
   _feedback: {fileID: 3782162643144668868}
   _scoreManager: {fileID: 1214052629351152978}
+  _responseManager: {fileID: 519965692471795988}
   _canReceiveInput: 0
 --- !u!1 &6171812712928418948
 GameObject:

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -7,16 +6,13 @@ public class CardSet : MonoBehaviour
 {
     public static System.Random rng = new System.Random();
 
-    public Action<Response> onPlayerChoice;
+    public Action<ColorMatchAnswer> onHandleInput;
 
     [SerializeField] private ColorMatchColors _cardData;
     [SerializeField] private CardComponent _topCard;
     [SerializeField] private CardComponent _bottomCard;
 
-    [HideInInspector] public bool canReceiveInput = false;
-
     private Animator _animator;
-    private float _timeBetweenResponse;
 
     private enum MatchType
     {
@@ -29,25 +25,20 @@ public class CardSet : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        onPlayerChoice = null;
     }
 
-    #region Animation
-    public void AnimateCardsIn()
+    public void Reset()
     {
-        _animator.Play("CardSlideIn");
+        onHandleInput = null;
     }
 
-    public void AnimateCardsFlip()
+    public void Initialize()
     {
-        _animator.Play("CardFlip");
-    }
+        Reset();
 
-    public void AnimateCardsBlink()
-    {
-        _animator.Play("CardBlink", layer: -1, normalizedTime: 0);
+        AnimateCardsIn();
+        SetCards();
     }
-    #endregion
 
     public void SetCards()
     {
@@ -55,7 +46,7 @@ public class CardSet : MonoBehaviour
         var matchType = (MatchType)values.GetValue(rng.Next(values.Length));
 
         var topColor = _cardData.GetRandomColor();
-        ColorMatchColor bottomColor = topColor;
+        var bottomColor = topColor;
         string bottomWordValue = topColor.name;
 
         switch (matchType)
@@ -80,47 +71,9 @@ public class CardSet : MonoBehaviour
         _bottomCard.SetText(bottomWordValue);
     }
 
-    public void Update()
+    public void OnCountdownTimerFinished()
     {
-        if (!canReceiveInput) return;
-
-        _timeBetweenResponse += Time.deltaTime;
-
-        // Respond with "no".
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            HandleInput(false);
-        }
-
-        // Respond with "yes".
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            HandleInput(true);
-        }
-    }
-
-    public void HandleInput(bool saidMatch)
-    {
-        var isCorrect = saidMatch == (_topCard.cardValue == _bottomCard.cardValue);
-
-        var response = new Response
-        {
-            isCorrect = isCorrect,
-            duration = _timeBetweenResponse
-        };
-        onPlayerChoice?.Invoke(response);
-        _timeBetweenResponse = 0;
-
-        TrialFinished();
-    }
-
-    public async Task HandleInput(Response response, Action onInputFinished)
-    {
-        await Task.Delay((int)(response.duration * 1000));
-
-        onPlayerChoice?.Invoke(response);
-        onInputFinished?.Invoke();
-        TrialFinished();
+        AnimateCardsFlip();
     }
 
     private void TrialFinished()
@@ -129,8 +82,52 @@ public class CardSet : MonoBehaviour
         SetCards();
     }
 
+    #region Input
+    public void HandleInput(ColorMatchResponseManager.YesNoResponse response)
+    {
+        var isCorrect = response.saidYes == (_topCard.cardValue == _bottomCard.cardValue);
+
+        var answer = new ColorMatchAnswer
+        {
+            isCorrect = isCorrect,
+            duration = response.duration,
+        };
+
+        onHandleInput?.Invoke(answer);
+
+        TrialFinished();
+    }
+
+    public async Task HandleInput(ColorMatchAnswer response, Action onInputFinished)
+    {
+        await Task.Delay((int)(response.duration * 1000));
+
+        onHandleInput?.Invoke(response);
+        onInputFinished?.Invoke();
+
+        TrialFinished();
+    }
+    #endregion
+
+    #region Animation
+    public void AnimateCardsIn()
+    {
+        _animator.Play("CardSlideIn");
+    }
+
+    public void AnimateCardsFlip()
+    {
+        _animator.Play("CardFlip");
+    }
+
+    public void AnimateCardsBlink()
+    {
+        _animator.Play("CardBlink", layer: -1, normalizedTime: 0);
+    }
+    #endregion
+
     [Serializable]
-    public struct Response
+    public struct ColorMatchAnswer
     {
         public bool isCorrect;
         public float duration;

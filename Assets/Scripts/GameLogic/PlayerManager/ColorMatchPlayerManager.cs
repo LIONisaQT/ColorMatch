@@ -10,10 +10,11 @@ public class ColorMatchPlayerManager : MonoBehaviour
     [SerializeField] private CountdownTimer _countdownTimer;
     [SerializeField] private Feedback _feedback;
     [SerializeField] private ColorMatchScoreManager _scoreManager;
+    [SerializeField] private ColorMatchResponseManager _responseManager;
 
     [SerializeField] private bool _canReceiveInput = false;
 
-    private Queue<CardSet.Response> _choiceHistory = new Queue<CardSet.Response>();
+    private Queue<CardSet.ColorMatchAnswer> _choiceHistory = new Queue<CardSet.ColorMatchAnswer>();
 
     private bool _isComputerPlayer = false;
 
@@ -21,13 +22,16 @@ public class ColorMatchPlayerManager : MonoBehaviour
 
     public void SetUpGame(bool isBot, Action onCountdownFinish)
     {
-        _cardSet.AnimateCardsIn();
-        _cardSet.SetCards();
-        _cardSet.onPlayerChoice += OnPlayerChoice;
-
         _choiceHistory.Clear();
 
-        // Player response setup.
+        _cardSet.Initialize();
+        _scoreManager.Initialize();
+        _countdownTimer.Initialize();
+        _responseManager.Initialize();
+
+        _responseManager.onInput += _cardSet.HandleInput;
+        _cardSet.onHandleInput += HandleResponse;
+
         if (isBot)
         {
             LoadComputerPlayer();
@@ -37,20 +41,18 @@ public class ColorMatchPlayerManager : MonoBehaviour
             _canReceiveInput = true;
         }
 
-        _scoreManager.Reset();
-
+        _countdownTimer.onCountdownFinish += _cardSet.OnCountdownTimerFinished;
         _countdownTimer.onCountdownFinish += OnCountdownTimerFinish;
         _countdownTimer.onCountdownFinish += onCountdownFinish;
+
         _countdownTimer.PlayCountdown();
     }
 
     public void OnCountdownTimerFinish()
     {
-        _cardSet.AnimateCardsFlip();
-
         if (!_isComputerPlayer)
         {
-            _cardSet.canReceiveInput = _canReceiveInput;
+            _responseManager.CanReceiveInput = _canReceiveInput;
         }
         else
         {
@@ -58,7 +60,7 @@ public class ColorMatchPlayerManager : MonoBehaviour
         }
     }
 
-    public void OnPlayerChoice(CardSet.Response response)
+    public void HandleResponse(CardSet.ColorMatchAnswer response)
     {
         if (!_isComputerPlayer)
         {
@@ -71,7 +73,7 @@ public class ColorMatchPlayerManager : MonoBehaviour
 
     public void EndGame()
     {
-        _cardSet.canReceiveInput = false;
+        _responseManager?.HandleGameEnd();
 
         if (!_isComputerPlayer)
         {
@@ -79,8 +81,6 @@ public class ColorMatchPlayerManager : MonoBehaviour
         }
 
         _choiceHistory.Clear();
-        _cardSet.onPlayerChoice = null;
-        _countdownTimer.onCountdownFinish = null;
     }
 
     private void RecordGameplayData()
@@ -101,7 +101,7 @@ public class ColorMatchPlayerManager : MonoBehaviour
         if (!File.Exists(@$"{Application.dataPath}/Metadata/metadata.json")) return;
 
         var file = File.ReadAllText(@$"{Application.dataPath}/Metadata/metadata.json");
-        _choiceHistory = JsonConvert.DeserializeObject<Queue<CardSet.Response>>(file);
+        _choiceHistory = JsonConvert.DeserializeObject<Queue<CardSet.ColorMatchAnswer>>(file);
     }
 
     private void AutoPlay()
@@ -113,7 +113,7 @@ public class ColorMatchPlayerManager : MonoBehaviour
         }
     }
 
-    private void ReplayChoice(CardSet.Response data)
+    private void ReplayChoice(CardSet.ColorMatchAnswer data)
     {
         _ = _cardSet.HandleInput(data, AutoPlay);
     }
