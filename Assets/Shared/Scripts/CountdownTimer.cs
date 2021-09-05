@@ -22,7 +22,6 @@ public class CountdownTimer : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-        onCountdownFinish = null;
     }
 
     public void PlayCountdown(int countdownTime = DEFAULT_COUNTDOWN_TIME)

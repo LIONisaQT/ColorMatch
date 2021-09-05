@@ -43,16 +43,17 @@ public class ColorMatchGameManager : MonoBehaviour
 
         for (var i = 0; i < _playerManagers.Count; i++)
         {
-            _playerManagers[i].SetUpGame(i != 0, this); // Player 1 is always the only human for now.
+            _playerManagers[i].SetUpGame(i != 0, OnCountdownTimerFinish); // Player 1 is always the only human for now.
         }
 
         _countdownsFinished = 0;
+
         _gameTimer.ResetTimer();
         _gameTimer.Instantiate();
         _gameTimer.onTimerFinish += FinishGame;
     }
 
-    public void CountdownTimerFinish()
+    public void OnCountdownTimerFinish()
     {
         _countdownsFinished++;
 
@@ -72,6 +73,7 @@ public class ColorMatchGameManager : MonoBehaviour
         CalculateWinner();
     }
 
+    #region Scoring
     private void CalculateWinner()
     {
         var playerScore = _playerManagers[0].Score;
@@ -113,6 +115,8 @@ public class ColorMatchGameManager : MonoBehaviour
             }
         }
 
+        print($"{playerScore} / {botScore} :: {resultType}");
+
         StartCoroutine(AnnounceResult(resultType));
         StartCoroutine(GoHome());
     }
@@ -145,6 +149,7 @@ public class ColorMatchGameManager : MonoBehaviour
                 break;
         }
     }
+    #endregion
 
     private IEnumerator GoHome()
     {

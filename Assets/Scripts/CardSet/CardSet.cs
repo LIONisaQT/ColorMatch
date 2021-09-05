@@ -1,11 +1,13 @@
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class CardSet : MonoBehaviour
 {
     public static System.Random rng = new System.Random();
 
-    public Action<bool> onPlayerChoice;
+    public Action<Response> onPlayerChoice;
 
     [SerializeField] private ColorMatchColors _cardData;
     [SerializeField] private CardComponent _topCard;
@@ -14,6 +16,7 @@ public class CardSet : MonoBehaviour
     [HideInInspector] public bool canReceiveInput = false;
 
     private Animator _animator;
+    private float _timeBetweenResponse;
 
     private enum MatchType
     {
@@ -81,6 +84,8 @@ public class CardSet : MonoBehaviour
     {
         if (!canReceiveInput) return;
 
+        _timeBetweenResponse += Time.deltaTime;
+
         // Respond with "no".
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -97,8 +102,37 @@ public class CardSet : MonoBehaviour
     public void HandleInput(bool saidMatch)
     {
         var isCorrect = saidMatch == (_topCard.cardValue == _bottomCard.cardValue);
-        onPlayerChoice?.Invoke(isCorrect);
+
+        var response = new Response
+        {
+            isCorrect = isCorrect,
+            duration = _timeBetweenResponse
+        };
+        onPlayerChoice?.Invoke(response);
+        _timeBetweenResponse = 0;
+
+        TrialFinished();
+    }
+
+    public async Task HandleInput(Response response, Action onInputFinished)
+    {
+        await Task.Delay((int)(response.duration * 1000));
+
+        onPlayerChoice?.Invoke(response);
+        onInputFinished?.Invoke();
+        TrialFinished();
+    }
+
+    private void TrialFinished()
+    {
         AnimateCardsBlink();
         SetCards();
+    }
+
+    [Serializable]
+    public struct Response
+    {
+        public bool isCorrect;
+        public float duration;
     }
 }

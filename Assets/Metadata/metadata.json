@@ -1,62 +1,26 @@
 [
   {
-    "choice": true,
-    "duration": 0.8598182
+    "isCorrect": true,
+    "duration": 0.753321648
   },
   {
-    "choice": true,
-    "duration": 0.7460523
+    "isCorrect": true,
+    "duration": 0.546638668
   },
   {
-    "choice": true,
-    "duration": 0.6801845
+    "isCorrect": true,
+    "duration": 0.8326094
   },
   {
-    "choice": true,
-    "duration": 0.792061269
+    "isCorrect": true,
+    "duration": 0.771214843
   },
   {
-    "choice": true,
-    "duration": 0.678767443
+    "isCorrect": true,
+    "duration": 0.7050825
   },
   {
-    "choice": true,
-    "duration": 2.01124
-  },
-  {
-    "choice": true,
-    "duration": 0.0
-  },
-  {
-    "choice": true,
-    "duration": 0.592544138
-  },
-  {
-    "choice": true,
-    "duration": 0.0
-  },
-  {
-    "choice": false,
-    "duration": 1.14321554
-  },
-  {
-    "choice": false,
-    "duration": 0.0
-  },
-  {
-    "choice": true,
-    "duration": 1.46078873
-  },
-  {
-    "choice": true,
-    "duration": 0.0
-  },
-  {
-    "choice": true,
-    "duration": 0.7910957
-  },
-  {
-    "choice": true,
-    "duration": 0.0
+    "isCorrect": true,
+    "duration": 1.09647346
   }
 ]

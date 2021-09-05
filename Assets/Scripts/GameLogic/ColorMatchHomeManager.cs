@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class ColorMatchHomeManager : MonoBehaviour
 {
+    private void Start()
+    {
+        Instantiate();
+    }
+
     public void Instantiate()
     {
         print("Arrive at home!");
