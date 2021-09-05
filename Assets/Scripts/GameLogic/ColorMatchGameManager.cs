@@ -11,15 +11,14 @@ public class ColorMatchGameManager : MonoBehaviour
 
     private void Start()
     {
+        print("Arrive at game!");
+
         for (var i = 0; i < _playerManagers.Count; i++)
         {
             _playerManagers[i].SetUpGame(i != 0, this); // Player 1 is always the only human for now.
-
-            if (_gameTimer != null)
-            {
-                _gameTimer.onTimerFinish += _playerManagers[i].EndGame;
-            }
         }
+
+        _gameTimer.onTimerFinish += FinishGame;
     }
 
     public void CountdownTimerFinish()
@@ -38,5 +37,7 @@ public class ColorMatchGameManager : MonoBehaviour
         {
             manager.EndGame();
         }
+
+        ColorMatchMainManager.Instance.GoToHome();
     }
 }
