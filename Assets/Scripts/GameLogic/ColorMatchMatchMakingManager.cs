@@ -45,11 +45,6 @@ public class ColorMatchMatchMakingManager : MonoBehaviour
         _elapsedTime.text = string.Format("Elapsed time: {0:00}:{1:00}", minutes, seconds);
     }
 
-    public void CancelMatchMakingPressed()
-    {
-        ColorMatchMainManager.Instance.GoToHome();
-    }
-
     public IEnumerator FindMatchAfterDelay(int delay)
     {
         yield return new WaitForSeconds(delay);
@@ -72,5 +67,12 @@ public class ColorMatchMatchMakingManager : MonoBehaviour
         yield return new WaitForSeconds(NOTIFICATION_DURATION);
 
         ColorMatchMainManager.Instance.GoToGame(false);
+    }
+
+    public void CancelMatchMakingPressed()
+    {
+        StopAllCoroutines();
+
+        ColorMatchMainManager.Instance.GoToHome();
     }
 }
