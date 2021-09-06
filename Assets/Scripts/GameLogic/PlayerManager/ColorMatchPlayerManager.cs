@@ -26,7 +26,7 @@ public class ColorMatchPlayerManager : MonoBehaviour
 
         _cardSet.Initialize();
         _scoreManager.Initialize();
-        _countdownTimer.Initialize();
+        _countdownTimer.Initialize(isBot);
         _responseManager.Initialize();
 
         _responseManager.onInput += _cardSet.HandleInput;

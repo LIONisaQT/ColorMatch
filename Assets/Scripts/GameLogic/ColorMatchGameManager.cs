@@ -6,18 +6,11 @@ public class ColorMatchGameManager : MonoBehaviour
 {
     public static System.Random rng = new System.Random();
 
+    private int _totalPlayers = 0;
     private int _countdownsFinished = 0;
 
     [SerializeField] private GameTimer _gameTimer;
     [SerializeField] private List<ColorMatchPlayerManager> _playerManagers;
-
-    [Header("Audio Clips")]
-    [SerializeField] private AudioClip _decisiveWinClip;
-    [SerializeField] private List<AudioClip> _winClips;
-    [SerializeField] private AudioClip _closeWinClip;
-    [SerializeField] private AudioClip _tieClip;
-    [SerializeField] private AudioClip _decisiveLossClip;
-    [SerializeField] private List<AudioClip> _lossClips;
 
     private enum MatchResultType
     {
@@ -30,34 +23,40 @@ public class ColorMatchGameManager : MonoBehaviour
         CloseLoss,
     }
 
-    private AudioSource _audioSource;
-
-    private void Awake()
+    public void Instantiate(bool isSolo)
     {
-        _audioSource = GetComponent<AudioSource>();
-    }
-
-    public void Instantiate()
-    {
-        print("Arrive at game!");
-
-        for (var i = 0; i < _playerManagers.Count; i++)
-        {
-            _playerManagers[i].SetUpGame(i != 0, OnCountdownTimerFinish); // Player 1 is always the only human for now.
-        }
+        _playerManagers[1].gameObject.SetActive(!isSolo);
+        _totalPlayers = isSolo ? 1 : 2;
 
         _countdownsFinished = 0;
 
         _gameTimer.ResetTimer();
         _gameTimer.Instantiate();
         _gameTimer.onTimerFinish += FinishGame;
+
+        StartCoroutine(DelayGameStart(2, isSolo));
+    }
+
+    private IEnumerator DelayGameStart(int seconds, bool isSolo)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        BeginGame(isSolo);
+    }
+
+    private void BeginGame(bool isSolo)
+    {
+        for (var i = 0; i < _totalPlayers; i++)
+        {
+            _playerManagers[i].SetUpGame(i != 0, OnCountdownTimerFinish); // Player 1 is always the only human for now.
+        }
     }
 
     public void OnCountdownTimerFinish()
     {
         _countdownsFinished++;
 
-        if (_countdownsFinished == _playerManagers.Count)
+        if (_countdownsFinished == _totalPlayers)
         {
             _gameTimer?.StartTimer();
         }
@@ -67,7 +66,7 @@ public class ColorMatchGameManager : MonoBehaviour
     {
         foreach (var manager in _playerManagers)
         {
-            manager.EndGame();
+            manager?.EndGame();
         }
 
         CalculateWinner();
@@ -76,46 +75,53 @@ public class ColorMatchGameManager : MonoBehaviour
     #region Scoring
     private void CalculateWinner()
     {
-        var playerScore = _playerManagers[0].Score;
-        var botScore = _playerManagers[1].Score;
+        var playerScore = _playerManagers[0]?.Score;
+        var botScore = _playerManagers[1]?.Score;
         MatchResultType resultType;
 
-        if (playerScore > botScore)
+        if (_totalPlayers == 1)
         {
-            if (playerScore - botScore > 200)
-            {
-                resultType = MatchResultType.DecisiveWin;
-            }
-            else if(playerScore - botScore <= 100)
-            {
-                resultType = MatchResultType.CloseWin;
-            }
-            else
-            {
-                resultType = MatchResultType.Win;
-            }
-        }
-        else if (playerScore == botScore)
-        {
-            resultType = MatchResultType.Tie;
+            resultType = playerScore > 0 ? MatchResultType.Win : MatchResultType.Loss;
         }
         else
         {
-            if (botScore - playerScore > 200)
+            if (playerScore > botScore)
             {
-                resultType = MatchResultType.DecisiveLoss;
+                if (playerScore - botScore > 200)
+                {
+                    resultType = MatchResultType.DecisiveWin;
+                }
+                else if (playerScore - botScore <= 100)
+                {
+                    resultType = MatchResultType.CloseWin;
+                }
+                else
+                {
+                    resultType = MatchResultType.Win;
+                }
             }
-            else if (botScore - playerScore <= 100)
+            else if (playerScore == botScore)
             {
-                resultType = MatchResultType.CloseLoss;
+                resultType = MatchResultType.Tie;
             }
             else
             {
-                resultType = MatchResultType.Loss;
+                if (botScore - playerScore > 200)
+                {
+                    resultType = MatchResultType.DecisiveLoss;
+                }
+                else if (botScore - playerScore <= 100)
+                {
+                    resultType = MatchResultType.CloseLoss;
+                }
+                else
+                {
+                    resultType = MatchResultType.Loss;
+                }
             }
-        }
 
-        print($"{playerScore} / {botScore} :: {resultType}");
+            print($"{playerScore} / {botScore} :: {resultType}");
+        }
 
         StartCoroutine(AnnounceResult(resultType));
         StartCoroutine(GoHome());
@@ -127,23 +133,23 @@ public class ColorMatchGameManager : MonoBehaviour
         switch (resultType)
         {
             case MatchResultType.DecisiveWin:
-                _audioSource.PlayOneShot(_decisiveWinClip);
+                ColorMatchMainManager.Instance.SoundManager.PlaySfx("resultDecisiveWin");
                 break;
             case MatchResultType.Win:
-                _audioSource.PlayOneShot(_winClips[rng.Next(_winClips.Count)]);
+                ColorMatchMainManager.Instance.SoundManager.PlaySfx("resultWin");
                 break;
             case MatchResultType.CloseWin:
-                _audioSource.PlayOneShot(_closeWinClip);
+                ColorMatchMainManager.Instance.SoundManager.PlaySfx("resultCloseWin");
                 break;
             case MatchResultType.Tie:
-                _audioSource.PlayOneShot(_tieClip);
+                ColorMatchMainManager.Instance.SoundManager.PlaySfx("resultDraw");
                 break;
             case MatchResultType.DecisiveLoss:
-                _audioSource.PlayOneShot(_decisiveLossClip);
+                ColorMatchMainManager.Instance.SoundManager.PlaySfx("resultDecisiveLoss");
                 break;
             case MatchResultType.Loss:
             case MatchResultType.CloseLoss:
-                _audioSource.PlayOneShot(_lossClips[rng.Next(_lossClips.Count)]);
+                ColorMatchMainManager.Instance.SoundManager.PlaySfx("resultLoss");
                 break;
             default:
                 break;

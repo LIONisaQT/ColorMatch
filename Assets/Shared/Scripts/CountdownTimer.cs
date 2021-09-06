@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -10,45 +11,56 @@ public class CountdownTimer : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _number;
 
-    [SerializeField] private AudioClip _countdown1;
-    [SerializeField] private AudioClip _countdown2;
-    [SerializeField] private AudioClip _countdown3;
-    [SerializeField] private AudioClip _countdownFinish;
-
     private Animator _animator;
-    private AudioSource _audioSource;
     private int _countdownTimer;
+    private bool _isBot = false;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _audioSource = GetComponent<AudioSource>();
     }
 
-    public void Initialize()
+    public void Initialize(bool isBot)
     {
         onCountdownFinish = null;
+        _isBot = isBot;
     }
 
     public void PlayCountdown(int countdownTime = DEFAULT_COUNTDOWN_TIME)
     {
+        if (!_isBot)
+        {
+            ColorMatchMainManager.Instance.SoundManager.PlaySfx("countdownStart");
+        }
+        
+
+        StartCoroutine(PlayCountdownAfterDelay(countdownTime, 2));
+    }
+
+    private IEnumerator PlayCountdownAfterDelay(int countdownTime, int delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+
         _countdownTimer = countdownTime;
         _number.text = countdownTime.ToString();
         _animator.Play("Countdown");
 
-        switch (countdownTime)
+        if (!_isBot)
         {
-            case 3:
-                _audioSource.PlayOneShot(_countdown3);
-                break;
-            case 2:
-                _audioSource.PlayOneShot(_countdown2);
-                break;
-            case 1:
-                _audioSource.PlayOneShot(_countdown1);
-                break;
-            default:
-                break;
+            switch (countdownTime)
+            {
+                case 3:
+                    ColorMatchMainManager.Instance.SoundManager.PlaySfx("countdown3");
+                    break;
+                case 2:
+                    ColorMatchMainManager.Instance.SoundManager.PlaySfx("countdown2");
+                    break;
+                case 1:
+                    ColorMatchMainManager.Instance.SoundManager.PlaySfx("countdown1");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -57,13 +69,16 @@ public class CountdownTimer : MonoBehaviour
         _countdownTimer--;
         if (_countdownTimer > 0)
         {
-            PlayCountdown(_countdownTimer);
+            StartCoroutine(PlayCountdownAfterDelay(_countdownTimer));
         }
         else
         {
             _animator.Play("Hide");
             onCountdownFinish?.Invoke();
-            _audioSource.PlayOneShot(_countdownFinish);
+            if (!_isBot)
+            {
+                ColorMatchMainManager.Instance.SoundManager.PlaySfx("countdownFinish");
+            }
         }
     }
 }

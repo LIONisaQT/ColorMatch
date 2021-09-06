@@ -14,10 +14,16 @@ public class ColorMatchResponseManager : MonoBehaviour
         set => _canReceiveInput = value;
     }
 
-    public void Initialize()
+    public void Reset()
     {
+        onInput = null;
         _canReceiveInput = false;
         _answerDuration = 0;
+    }
+
+    public void Initialize()
+    {
+        Reset();
     }
 
     void Update()

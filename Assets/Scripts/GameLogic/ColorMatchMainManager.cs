@@ -4,6 +4,7 @@ public class ColorMatchMainManager : MonoBehaviour
 {
     [SerializeField] private ColorMatchGameManager _gameManager;
     [SerializeField] private ColorMatchHomeManager _homeManager;
+    [SerializeField] private SoundManager _soundManager;
 
     private static ColorMatchMainManager _instance;
 
@@ -11,6 +12,8 @@ public class ColorMatchMainManager : MonoBehaviour
     {
         get { return _instance; }
     }
+
+    public SoundManager SoundManager => _soundManager;
 
     private void Awake()
     {
@@ -25,10 +28,10 @@ public class ColorMatchMainManager : MonoBehaviour
         }
     }
 
-    public void GoToGame()
+    public void GoToGame(bool isSolo)
     {
         _gameManager.gameObject.SetActive(true);
-        _gameManager.Instantiate();
+        _gameManager.Instantiate(isSolo);
         _homeManager.gameObject.SetActive(false);
     }
 

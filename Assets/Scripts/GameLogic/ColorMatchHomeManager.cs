@@ -9,22 +9,23 @@ public class ColorMatchHomeManager : MonoBehaviour
 
     public void Instantiate()
     {
-        print("Arrive at home!");
+        ColorMatchMainManager.Instance.SoundManager.PlaySfx("homeEnter");
     }
 
     public void TutorialButtonPressed()
     {
-        print("Tutorial button pressed!");
+        ColorMatchMainManager.Instance.SoundManager.PlaySfx("tutorialClick");
     }
 
     public void SoloButtonPressed()
     {
-        ColorMatchMainManager.Instance.GoToGame();
-
+        ColorMatchMainManager.Instance.SoundManager.PlaySfx("soloClick");
+        ColorMatchMainManager.Instance.GoToGame(true);
     }
 
     public void VersusButtonPressed()
     {
-        ColorMatchMainManager.Instance.GoToGame();
+        ColorMatchMainManager.Instance.SoundManager.PlaySfx("versusClick");
+        ColorMatchMainManager.Instance.GoToGame(false);
     }
 }

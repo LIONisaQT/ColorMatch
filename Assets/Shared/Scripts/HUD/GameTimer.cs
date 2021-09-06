@@ -8,16 +8,13 @@ public class GameTimer : MonoBehaviour
 
     [SerializeField] private float _timeValue = 10f;
     [SerializeField] public TextMeshProUGUI _timeText;
-    [SerializeField] private AudioClip _timeUpClip;
 
     private float _currentTimeValue;
     private bool _timerStarted = false;
     private bool _invokedTimerFinishAction = false;
-    private AudioSource _audioSource;
 
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
         _currentTimeValue = _timeValue;
     }
 
@@ -70,7 +67,7 @@ public class GameTimer : MonoBehaviour
     {
         _invokedTimerFinishAction = true;
         onTimerFinish?.Invoke();
-        _audioSource.PlayOneShot(_timeUpClip);
+        ColorMatchMainManager.Instance.SoundManager.PlaySfx("timesUp");
     }
 
     public void ResetTimer()
