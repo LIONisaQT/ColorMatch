@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b96b0dcda402b43ab463852a1014c6, type: 3}
+  m_Name: UnrealTournamentSoundLibrary
+  m_EditorClassIdentifier: 
+  _soundCollection:
+  - name: matchFound
+    clips:
+    - {fileID: 8300000, guid: b2468f32d619dfd42989c01926986490, type: 3}
+  - name: countdownStart
+    clips:
+    - {fileID: 8300000, guid: 2f9edd0df6c99ce44b1bb5e827a185f9, type: 3}
+  - name: countdown3
+    clips:
+    - {fileID: 8300000, guid: bce7e157ffd0fad489f8e50b20c2bb96, type: 3}
+  - name: countdown2
+    clips:
+    - {fileID: 8300000, guid: 87349071b01d3fc45997693206478d18, type: 3}
+  - name: countdown1
+    clips:
+    - {fileID: 8300000, guid: 1d4e78671cd111c49b885d7ee37c62b1, type: 3}
+  - name: countdownFinish
+    clips:
+    - {fileID: 8300000, guid: 69997b7df7803d949aac70bad73ae199, type: 3}
+  - name: feedbackCorrect
+    clips:
+    - {fileID: 8300000, guid: 19c9b9d7816882e49a28b21a5018560f, type: 3}
+    - {fileID: 8300000, guid: 367a8b35b3b33de4890ca994b4aac894, type: 3}
+    - {fileID: 8300000, guid: e7f9aa5519ec11a429592d440ebf5d81, type: 3}
+    - {fileID: 8300000, guid: 7f4a75808ae55464daaaa173967bb07b, type: 3}
+    - {fileID: 8300000, guid: 95219a1fa0f291049aeddbcc40fafc87, type: 3}
+    - {fileID: 8300000, guid: 3eb0b20e3fa08754ea6378b380a1f6de, type: 3}
+    - {fileID: 8300000, guid: 50cd12fcd5582d64a94d437d2930f019, type: 3}
+    - {fileID: 8300000, guid: 5368c33f754ef9542b4510813fa2832d, type: 3}
+    - {fileID: 8300000, guid: 7dfe24270b8e7bd48872df4653635879, type: 3}
+    - {fileID: 8300000, guid: e2c9f50168bcd064094005e1f6f6428d, type: 3}
+    - {fileID: 8300000, guid: 2fb78a0b46b228048ad7d25bbc7f34a3, type: 3}
+  - name: feedbackIncorrect
+    clips: []
+  - name: multiplierUp
+    clips:
+    - {fileID: 8300000, guid: 778aa39b99670a448b340ce1bb3a707a, type: 3}
+    - {fileID: 8300000, guid: 8f9e44d0a6023634181725d003eb509c, type: 3}
+    - {fileID: 8300000, guid: 6049c0c9ad6a8a64bbd61eaf3cb66093, type: 3}
+    - {fileID: 8300000, guid: a58f7911674ceb24ebfbdb9f03ab7162, type: 3}
+    - {fileID: 8300000, guid: 2221b869d696e7e47ad8fd76149682eb, type: 3}
+  - name: multiplierDown
+    clips: []
+  - name: timesUp
+    clips:
+    - {fileID: 8300000, guid: d8b8d9ad5fc3c27418f47b184c1634a2, type: 3}
+  - name: resultDraw
+    clips:
+    - {fileID: 8300000, guid: 272ba15ce6152fc438030d9f3f830de0, type: 3}
+  - name: resultWin
+    clips:
+    - {fileID: 8300000, guid: 1e684cc4d9c31884298677bb5543899d, type: 3}
+  - name: resultCloseWin
+    clips:
+    - {fileID: 8300000, guid: 642feb9a92418ab4f963b8513286ca80, type: 3}
+  - name: resultDecisiveWin
+    clips:
+    - {fileID: 8300000, guid: dae87afc7fbc3e44a88c2ad644eff37c, type: 3}
+  - name: resultLoss
+    clips:
+    - {fileID: 8300000, guid: 7b5b1f35647156d4a8728bf020d7f4f0, type: 3}
+  - name: resultDecisiveLoss
+    clips:
+    - {fileID: 8300000, guid: 5cfe26c050fa2924a9ff776e7516e323, type: 3}
+    - {fileID: 8300000, guid: f6ee1d9310422504db2218a6001bde9c, type: 3}
+    - {fileID: 8300000, guid: 444c59a002edc65479d52e3572f77b00, type: 3}

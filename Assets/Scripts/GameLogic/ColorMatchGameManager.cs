@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ColorMatchGameManager : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class ColorMatchGameManager : MonoBehaviour
 
     [SerializeField] private GameTimer _gameTimer;
     [SerializeField] private List<ColorMatchPlayerManager> _playerManagers;
+
+    // TODO: Make manager for this.
+    [SerializeField] private GameObject _gameResultObject;
+    [SerializeField] private TextMeshProUGUI _gameResultText;
 
     private enum MatchResultType
     {
@@ -25,6 +30,9 @@ public class ColorMatchGameManager : MonoBehaviour
 
     public void Instantiate(bool isSolo)
     {
+        _gameResultObject.SetActive(false);
+        _gameResultText.text = string.Empty;
+
         _playerManagers[1].gameObject.SetActive(!isSolo);
         _totalPlayers = isSolo ? 1 : 2;
 
@@ -124,12 +132,46 @@ public class ColorMatchGameManager : MonoBehaviour
         }
 
         StartCoroutine(AnnounceResult(resultType));
-        StartCoroutine(GoHome());
+    }
+
+    private void DisplayResult(MatchResultType resultType)
+    {
+        _gameResultObject.SetActive(true);
+
+        switch (resultType)
+        {
+            case MatchResultType.DecisiveWin:
+                _gameResultText.text = "DECISIVE WIN";
+                break;
+            case MatchResultType.Win:
+                _gameResultText.text = "YOU WIN";
+                break;
+            case MatchResultType.CloseWin:
+                _gameResultText.text = "CLOSE WIN";
+                break;
+            case MatchResultType.Tie:
+                _gameResultText.text = "DOUBLE KO";
+                break;
+            case MatchResultType.DecisiveLoss:
+                _gameResultText.text = "U GOT REKT LOL";
+                break;
+            case MatchResultType.Loss:
+                _gameResultText.text = "YOU LOSE";
+                break;
+            case MatchResultType.CloseLoss:
+                _gameResultText.text = "CLOSE LOSS";
+                break;
+            default:
+                break;
+        }
     }
 
     private IEnumerator AnnounceResult(MatchResultType resultType)
     {
         yield return new WaitForSeconds(2f);
+
+        DisplayResult(resultType);
+
         switch (resultType)
         {
             case MatchResultType.DecisiveWin:
@@ -154,13 +196,30 @@ public class ColorMatchGameManager : MonoBehaviour
             default:
                 break;
         }
+
+        switch (resultType)
+        {
+            case MatchResultType.DecisiveWin:
+            case MatchResultType.Win:
+            case MatchResultType.CloseWin:
+                ColorMatchMainManager.Instance.SoundManager.PlayBgm("victoryTrack");
+                break;
+            case MatchResultType.DecisiveLoss:
+            case MatchResultType.Loss:
+            case MatchResultType.CloseLoss:
+                ColorMatchMainManager.Instance.SoundManager.PlayBgm("defeatTrack");
+                break;
+            case MatchResultType.Tie:
+                ColorMatchMainManager.Instance.SoundManager.PlayBgm("drawTrack");
+                break;
+            default:
+                break;
+        }
     }
     #endregion
 
-    private IEnumerator GoHome()
+    public void GoHome()
     {
-        yield return new WaitForSeconds(4);
-
         foreach (var manager in _playerManagers)
         {
             manager.CleanUp();
