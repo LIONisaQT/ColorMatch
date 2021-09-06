@@ -643,8 +643,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb3cab26151ab749bb5c29b5ec3bb3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfxLibrary: {fileID: 11400000, guid: bfb29c3c0daaba745b46bf3a8d7107b5, type: 2}
-  _bgmLibrary: {fileID: 11400000, guid: 0214b8779753e1542a5875639fbb5c1e, type: 2}
+  _sfxLibrary: {fileID: 11400000, guid: 5dd3a77c48aaa9d47898f5651843a375, type: 2}
+  _bgmLibrary: {fileID: 11400000, guid: c9feb0fda00d59b4ab0854bcfad2bf4a, type: 2}
   _soundClipAudioSource: {fileID: 1083518908}
   _bgmAudioSource1: {fileID: 2062440907}
   _bgmAudioSource2: {fileID: 1829894473}
