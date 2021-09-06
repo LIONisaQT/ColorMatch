@@ -10,11 +10,13 @@ public class ColorMatchHomeManager : MonoBehaviour
     public void Instantiate()
     {
         ColorMatchMainManager.Instance.SoundManager.PlaySfx("homeEnter");
+        ColorMatchMainManager.Instance.SoundManager.PlayBgm("lobbyTrack");
     }
 
     public void TutorialButtonPressed()
     {
         ColorMatchMainManager.Instance.SoundManager.PlaySfx("tutorialClick");
+        ColorMatchMainManager.Instance.GoToGame(true);
     }
 
     public void SoloButtonPressed()
@@ -26,6 +28,6 @@ public class ColorMatchHomeManager : MonoBehaviour
     public void VersusButtonPressed()
     {
         ColorMatchMainManager.Instance.SoundManager.PlaySfx("versusClick");
-        ColorMatchMainManager.Instance.GoToGame(false);
+        ColorMatchMainManager.Instance.GoToMatchMaking();
     }
 }

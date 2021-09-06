@@ -26,7 +26,6 @@ public class SoundLibrary : ScriptableObject
         
         if (!hasClips)
         {
-            Debug.LogWarning($"There are no clips for {name}!");
             return null;
         }
 

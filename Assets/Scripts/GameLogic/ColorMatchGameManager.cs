@@ -34,6 +34,8 @@ public class ColorMatchGameManager : MonoBehaviour
         _gameTimer.Instantiate();
         _gameTimer.onTimerFinish += FinishGame;
 
+        ColorMatchMainManager.Instance.SoundManager.PlayBgm(isSolo ? "soloTrack" : "versusTrack");
+
         StartCoroutine(DelayGameStart(2, isSolo));
     }
 
