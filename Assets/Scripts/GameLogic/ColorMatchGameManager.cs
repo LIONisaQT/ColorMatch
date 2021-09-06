@@ -66,12 +66,12 @@ public class ColorMatchGameManager : MonoBehaviour
 
     public void FinishGame()
     {
+        CalculateWinner();
+
         foreach (var manager in _playerManagers)
         {
             manager?.EndGame();
         }
-
-        CalculateWinner();
     }
 
     #region Scoring
@@ -121,8 +121,6 @@ public class ColorMatchGameManager : MonoBehaviour
                     resultType = MatchResultType.Loss;
                 }
             }
-
-            print($"{playerScore} / {botScore} :: {resultType}");
         }
 
         StartCoroutine(AnnounceResult(resultType));
@@ -162,6 +160,12 @@ public class ColorMatchGameManager : MonoBehaviour
     private IEnumerator GoHome()
     {
         yield return new WaitForSeconds(4);
+
+        foreach (var manager in _playerManagers)
+        {
+            manager.CleanUp();
+        }
+
         ColorMatchMainManager.Instance.GoToHome();
     }
 }

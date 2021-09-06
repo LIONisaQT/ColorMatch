@@ -21,12 +21,13 @@ public class Feedback : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void ShowFeedback(bool isCorrect)
+    public void ShowFeedback(bool isCorrect, bool isBot)
     {
         _feedbackText.text = isCorrect ? _correctText : _incorrectText;
         _background.color = isCorrect ? _correctColor : _incorrectColor;
         _animator.Play("ShowFeedback", layer: -1, normalizedTime: 0);
 
-        ColorMatchMainManager.Instance.SoundManager.PlaySfx(isCorrect ? "feedbackCorrect" : "feedbackIncorrect");
+        if (!isBot)
+            ColorMatchMainManager.Instance.SoundManager.PlaySfx(isCorrect ? "feedbackCorrect" : "feedbackIncorrect");
     }
 }

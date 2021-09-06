@@ -1,10 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class ColorMatchMatchMakingManager : MonoBehaviour
 {
+    private const int NOTIFICATION_DURATION = 9;
+
     [SerializeField] private TextMeshProUGUI _elapsedTime;
     [SerializeField] private TextMeshProUGUI _estimatedTime;
     [SerializeField] private GameObject _matchFoundObject;
@@ -18,7 +19,7 @@ public class ColorMatchMatchMakingManager : MonoBehaviour
         _timeElapsed = 0;
         _foundMatch = false;
 
-        var estimate = ColorMatchGameManager.rng.Next(1) + 5;
+        var estimate = ColorMatchGameManager.rng.Next(3) + 3;
         var minutes = Mathf.FloorToInt(estimate / 60f);
         var seconds = Mathf.FloorToInt(estimate % 60f);
 
@@ -68,7 +69,7 @@ public class ColorMatchMatchMakingManager : MonoBehaviour
 
     private IEnumerator GoToMatch()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(NOTIFICATION_DURATION);
 
         ColorMatchMainManager.Instance.GoToGame(false);
     }

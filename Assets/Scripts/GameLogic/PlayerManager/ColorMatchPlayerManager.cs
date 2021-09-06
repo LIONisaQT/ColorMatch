@@ -25,7 +25,7 @@ public class ColorMatchPlayerManager : MonoBehaviour
         _choiceHistory.Clear();
 
         _cardSet.Initialize();
-        _scoreManager.Initialize();
+        _scoreManager.Initialize(isBot);
         _countdownTimer.Initialize(isBot);
         _responseManager.Initialize();
 
@@ -67,7 +67,7 @@ public class ColorMatchPlayerManager : MonoBehaviour
             _choiceHistory.Enqueue(response);
         }
 
-        _feedback.ShowFeedback(response.isCorrect);
+        _feedback.ShowFeedback(response.isCorrect, _isComputerPlayer);
         _scoreManager.UpdateScore(response.isCorrect);
     }
 
@@ -81,6 +81,11 @@ public class ColorMatchPlayerManager : MonoBehaviour
         }
 
         _choiceHistory.Clear();
+    }
+
+    public void CleanUp()
+    {
+        _scoreManager?.Reset();
     }
 
     private void RecordGameplayData()
