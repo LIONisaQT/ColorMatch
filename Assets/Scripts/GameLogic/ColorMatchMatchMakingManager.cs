@@ -4,7 +4,7 @@ using TMPro;
 
 public class ColorMatchMatchMakingManager : MonoBehaviour
 {
-    private const int NOTIFICATION_DURATION = 9;
+    private const int NOTIFICATION_DURATION = 1;
 
     [SerializeField] private TextMeshProUGUI _elapsedTime;
     [SerializeField] private TextMeshProUGUI _estimatedTime;
@@ -19,7 +19,7 @@ public class ColorMatchMatchMakingManager : MonoBehaviour
         _timeElapsed = 0;
         _foundMatch = false;
 
-        var estimate = ColorMatchGameManager.rng.Next(3) + 3;
+        var estimate = ColorMatchGameManager.rng.Next(1) + 1;
         var minutes = Mathf.FloorToInt(estimate / 60f);
         var seconds = Mathf.FloorToInt(estimate % 60f);
 

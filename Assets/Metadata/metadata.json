@@ -1,26 +1,5 @@
-[
-  {
-    "isCorrect": true,
-    "duration": 0.753321648
-  },
-  {
-    "isCorrect": true,
-    "duration": 0.546638668
-  },
-  {
-    "isCorrect": true,
-    "duration": 0.8326094
-  },
-  {
-    "isCorrect": true,
-    "duration": 0.771214843
-  },
-  {
-    "isCorrect": true,
-    "duration": 0.7050825
-  },
-  {
-    "isCorrect": true,
-    "duration": 1.09647346
-  }
-]
+{
+  "name": "50319f93c7ba854ebe096ed4ce58d0be5c591e6f",
+  "accuracy": 1.0,
+  "decisionDelay": 0.7019183
+}

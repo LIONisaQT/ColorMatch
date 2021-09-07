@@ -51,12 +51,12 @@ public class ColorMatchGameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
 
-        BeginGame(isSolo);
+        BeginGame();
     }
 
-    private void BeginGame(bool isSolo)
+    private void BeginGame()
     {
-        for (var i = 0; i < _totalPlayers; i++)
+        for (var i = 0; i < _playerManagers.Count; i++)
         {
             _playerManagers[i].SetUpGame(i != 0, OnCountdownTimerFinish); // Player 1 is always the only human for now.
         }
@@ -222,7 +222,7 @@ public class ColorMatchGameManager : MonoBehaviour
     {
         foreach (var manager in _playerManagers)
         {
-            manager.CleanUp();
+            manager?.CleanUp();
         }
 
         ColorMatchMainManager.Instance.GoToHome();

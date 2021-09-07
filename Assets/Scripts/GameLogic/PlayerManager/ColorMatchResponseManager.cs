@@ -51,6 +51,7 @@ public class ColorMatchResponseManager : MonoBehaviour
         };
 
         onInput?.Invoke(response);
+        _answerDuration = 0;
     }
 
     public void HandleGameEnd()
