@@ -81,9 +81,12 @@ public class ColorMatchPlayerManager : MonoBehaviour
         if (!_isComputerPlayer)
         {
             RecordGameplayData();
+            _choiceHistory.Clear();
         }
-
-        _choiceHistory.Clear();
+        else
+        {
+            StopAllCoroutines();
+        }
     }
 
     public void CleanUp()
@@ -145,7 +148,7 @@ public class ColorMatchPlayerManager : MonoBehaviour
 
     private void ReplayChoice(CardSet.ColorMatchAnswer data)
     {
-        _ = _cardSet.HandleInput(data, AutoPlay);
+        StartCoroutine(_cardSet.HandleInput(data, AutoPlay));
     }
 #endregion
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -98,9 +99,9 @@ public class CardSet : MonoBehaviour
         TrialFinished();
     }
 
-    public async Task HandleInput(ColorMatchAnswer response, Action onInputFinished)
+    public IEnumerator HandleInput(ColorMatchAnswer response, Action onInputFinished)
     {
-        await Task.Delay((int)(response.duration * 1000));
+        yield return new WaitForSeconds(response.duration);
 
         onHandleInput?.Invoke(response);
         onInputFinished?.Invoke();

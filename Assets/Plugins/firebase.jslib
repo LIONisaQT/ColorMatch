@@ -5,12 +5,8 @@ mergeInto(LibraryManager.library, {
 		var parsedCallback = Pointer_stringify(callback);
 		var parsedFallback = Pointer_stringify(fallback);
 
-		console.log(window.db);
-		console.log(window.test);
-
 		try {
-			const querySnapshot = window.getData();
-			window.unityInstance.Module.SendMessage(parsedObjectName, parsedCallback, JSON.stringify(querySnapshot));
+			window.unityInstance.Module.SendMessage(parsedObjectName, parsedCallback, JSON.stringify(window.playerData));
 		} catch (error) {
 			window.unityInstance.Module.SendMessage(parsedObjectName, parsedFallback, "There was an error: " + error.message);
 		}
@@ -22,10 +18,6 @@ mergeInto(LibraryManager.library, {
 		var parsedPayload = Pointer_stringify(payload);
 		var parsedCallback = Pointer_stringify(callback);
 		var parsedFallback = Pointer_stringify(fallback);
-
-		console.log(window.db);
-		console.log(window.test);
-		console.log(parsedPayload);
 
 		try {
 			window.sendData(parsedPayload);
