@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 872268ac58470fd479599ce337abc7c3, type: 2}
+  m_sharedMaterial: {fileID: -8250962368263758459, guid: 872268ac58470fd479599ce337abc7c3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -186,10 +186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _number: {fileID: 8227161727770061739}
-  _countdown1: {fileID: 8300000, guid: a4cfa873969daa5499bb8b9738af2f1a, type: 3}
-  _countdown2: {fileID: 8300000, guid: adcc5427ce26bdf4ca5089c566a41ff6, type: 3}
-  _countdown3: {fileID: 8300000, guid: 5df3b84ba8d14034ab1fa24811eb5daf, type: 3}
-  _countdownFinish: {fileID: 8300000, guid: 74f7d6b54263369449ae00e53f704efb, type: 3}
 --- !u!95 &1732994636014030521
 Animator:
   serializedVersion: 3

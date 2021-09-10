@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sfxLibrary: {fileID: 11400000, guid: 5dd3a77c48aaa9d47898f5651843a375, type: 2}
-  _bgmLibrary: {fileID: 11400000, guid: fefbb9691007ab747805eacc455dc2d7, type: 2}
+  _bgmLibrary: {fileID: 11400000, guid: c9feb0fda00d59b4ab0854bcfad2bf4a, type: 2}
   _soundClipAudioSource: {fileID: 1083518908}
   _bgmAudioSource1: {fileID: 2062440907}
   _bgmAudioSource2: {fileID: 1829894473}
@@ -1498,10 +1498,6 @@ PrefabInstance:
     - target: {fileID: 7230290423044261803, guid: 03c2b4f25e27b49418922b8884e887ce, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7230290423931403758, guid: 03c2b4f25e27b49418922b8884e887ce, type: 3}
-      propertyPath: _timeValue
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7230290424402386297, guid: 03c2b4f25e27b49418922b8884e887ce, type: 3}
       propertyPath: m_Name
