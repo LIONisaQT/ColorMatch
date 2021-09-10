@@ -26,6 +26,11 @@ MonoBehaviour:
   - name: matchFound
     clips:
     - {fileID: 8300000, guid: 04d67db22bde24846991d0448278a940, type: 3}
+  - name: matchFoundSfx
+    clips:
+    - {fileID: 8300000, guid: 1e6badf56a87f9f41be12697d33d8ce0, type: 3}
+    - {fileID: 8300000, guid: dec81f3314382864a963a3f9c35c02b2, type: 3}
+    - {fileID: 8300000, guid: 2a02c8374bd30af46ac5c35d71cebd1f, type: 3}
   - name: homeEnter
     clips:
     - {fileID: 8300000, guid: 63577f4006ea7fd45b488dc5a39c446c, type: 3}

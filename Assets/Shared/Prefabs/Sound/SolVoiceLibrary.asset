@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b96b0dcda402b43ab463852a1014c6, type: 3}
+  m_Name: SolVoiceLibrary
+  m_EditorClassIdentifier: 
+  _soundCollection:
+  - name: tutorialClick
+    clips:
+    - {fileID: 8300000, guid: a6b87e3067dd79b469632d2dba2bc928, type: 3}
+    - {fileID: 8300000, guid: 96037e4a17eca3a42b924ba826dc5657, type: 3}
+  - name: soloClick
+    clips:
+    - {fileID: 8300000, guid: 92b24412abb2aa54294a014b752ff5d9, type: 3}
+  - name: versusClick
+    clips:
+    - {fileID: 8300000, guid: a3a143c97fdd06248847e39166732b99, type: 3}
+  - name: matchFound
+    clips:
+    - {fileID: 8300000, guid: 8e666b80cfee7e847b396a7c665068ad, type: 3}
+  - name: matchFoundSfx
+    clips:
+    - {fileID: 8300000, guid: 1e6badf56a87f9f41be12697d33d8ce0, type: 3}
+    - {fileID: 8300000, guid: dec81f3314382864a963a3f9c35c02b2, type: 3}
+    - {fileID: 8300000, guid: 2a02c8374bd30af46ac5c35d71cebd1f, type: 3}
+  - name: homeEnter
+    clips:
+    - {fileID: 8300000, guid: f9d1079740a8d854895750598fd14a80, type: 3}
+  - name: countdownStart
+    clips:
+    - {fileID: 8300000, guid: 8ea2c6e3b1aa4c84ea3b0eda68dd8cde, type: 3}
+    - {fileID: 8300000, guid: f06c0d0bfa617fe4eb885fc0905ef1ed, type: 3}
+  - name: countdown3
+    clips:
+    - {fileID: 8300000, guid: 5b2033f6ba20cd145abd9bf15c0e41a7, type: 3}
+  - name: countdown2
+    clips:
+    - {fileID: 8300000, guid: 4177baa47ee59834796f7d6b1aa96e5b, type: 3}
+  - name: countdown1
+    clips:
+    - {fileID: 8300000, guid: b61464b7cea13894581961623c8801b6, type: 3}
+  - name: countdownFinish
+    clips:
+    - {fileID: 8300000, guid: 629b7d9e8234a1d4ebb04f2e877ee0e6, type: 3}
+  - name: feedbackCorrect
+    clips:
+    - {fileID: 8300000, guid: 236cb5574bef9b945a5c94541ba42e7b, type: 3}
+    - {fileID: 8300000, guid: 2ccd9025fae33e44b9f19cc74341199d, type: 3}
+    - {fileID: 8300000, guid: 39be0a6f6f516bd4185caf21aaf84727, type: 3}
+  - name: feedbackIncorrect
+    clips:
+    - {fileID: 8300000, guid: 33162ff6036430945b48af9ae76c0a45, type: 3}
+    - {fileID: 8300000, guid: 1c5a4a24292a27b42a52d81e9c89da78, type: 3}
+    - {fileID: 8300000, guid: e4c455aa5fe771d42a535cfd82b784e5, type: 3}
+  - name: multiplierUp
+    clips:
+    - {fileID: 8300000, guid: 1e41bb7d04dd2ce4683f4d75a8d64872, type: 3}
+  - name: multiplierDown
+    clips:
+    - {fileID: 8300000, guid: fc23e18fbe3652440b37dd9ea522fa9a, type: 3}
+  - name: timesUp
+    clips:
+    - {fileID: 8300000, guid: 498026f0326b5d04a8892f03999f61b6, type: 3}
+  - name: resultDraw
+    clips:
+    - {fileID: 8300000, guid: 0b091da59045c7d4daf30e6d08344751, type: 3}
+    - {fileID: 8300000, guid: 342f79093fcf9c3419e5bad3e5f3300e, type: 3}
+  - name: resultWin
+    clips:
+    - {fileID: 8300000, guid: 20600c59c3e3dc74182b1b9ab67eb840, type: 3}
+    - {fileID: 8300000, guid: b37966a05edc9d842abded4f503e2565, type: 3}
+    - {fileID: 8300000, guid: 253c94be039871b419986ddc0f8bccb8, type: 3}
+    - {fileID: 8300000, guid: 9049945dc12fe3248b34d538b4517660, type: 3}
+  - name: resultCloseWin
+    clips:
+    - {fileID: 8300000, guid: b511d4af57ef44d48a2a10a32e6f50ca, type: 3}
+  - name: resultDecisiveWin
+    clips:
+    - {fileID: 8300000, guid: fea4e8265515bb347933787d78f6cc66, type: 3}
+  - name: resultLoss
+    clips:
+    - {fileID: 8300000, guid: 999440a65c6d6984abc546a82e4516dc, type: 3}
+    - {fileID: 8300000, guid: 05a07101db016a64393f6e7923a78b13, type: 3}
+    - {fileID: 8300000, guid: 863488c4ac64bd04a884f377f43963da, type: 3}
+    - {fileID: 8300000, guid: a4a061ae8f71a9a4097b7d26e1ccfc57, type: 3}
+  - name: resultDecisiveLoss
+    clips:
+    - {fileID: 8300000, guid: 17161c49c62dff24e98f888d3de4fb57, type: 3}

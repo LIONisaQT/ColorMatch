@@ -57,6 +57,7 @@ public class ColorMatchMatchMakingManager : MonoBehaviour
         _foundMatch = true;
         _matchFoundObject.SetActive(true);
         ColorMatchMainManager.Instance.SoundManager.PlaySfx("matchFound");
+        ColorMatchMainManager.Instance.SoundManager.PlaySfx("matchFoundSfx");
         ColorMatchMainManager.Instance.SoundManager.PlayBgm("opponentFound");
 
         StartCoroutine(GoToMatch());
